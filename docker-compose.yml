@@ -1,0 +1,63 @@
+services:
+  traefik:
+    image: traefik:v3.0
+    user: "0:0"
+    command:
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.file.directory=/etc/traefik/dynamic
+      - --providers.file.watch=true
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8081:8080"
+    volumes:
+      - ./docker/traefik:/etc/traefik/dynamic:ro
+    networks:
+      - web
+      - internal
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      - DB_DRIVER=mysql
+      - DB_HOST=db
+      - DB_NAME=gestion_produits
+      - DB_USER=root
+      - DB_PASSWORD=root
+    volumes:
+      - uploads:/var/www/html/uploads
+    depends_on:
+      - db
+    networks:
+      - web
+      - internal
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.gestion-produits.rule=Host(`gestion-produits.local`)
+      - traefik.http.routers.gestion-produits.entrypoints=web
+
+  db:
+    image: mysql:8.4
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=gestion_produits
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    networks:
+      - internal
+
+volumes:
+  mysql_data:
+  uploads:
+
+networks:
+  web:
+    name: web
+  internal:
+    internal: true

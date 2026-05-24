@@ -1,0 +1,24 @@
+http:
+  routers:
+    gestion-produits:
+      entryPoints:
+        - web
+      rule: "Host(`gestion-produits.local`)"
+      service: gestion-produits
+
+    gestion-produits-dev:
+      entryPoints:
+        - web
+      rule: "Host(`gestion-produits-dev.local`)"
+      service: gestion-produits-dev
+
+  services:
+    gestion-produits:
+      loadBalancer:
+        servers:
+          - url: "http://app:80"
+
+    gestion-produits-dev:
+      loadBalancer:
+        servers:
+          - url: "http://app-dev:80"
