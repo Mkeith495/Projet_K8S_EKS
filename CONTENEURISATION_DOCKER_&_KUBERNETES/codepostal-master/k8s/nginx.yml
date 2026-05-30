@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bdd-password-mkeith495
+type: Opaque
+stringData:
+  password: password
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-mkeith495
+spec:
+  selector:
+    matchLabels:
+      app: mysql-mkeith495
+  template:
+    metadata:
+      labels:
+        app: mysql-mkeith495
+    spec:
+      containers:
+        - name: mysql
+          image: anthonymasset/codepostal-mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bdd-password-mkeith495
+                  key: password
+          volumeMounts:
+            - name: mysql-data-mkeith495
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data-mkeith495
+          hostPath:
+            path: /home/m1dev/mkeith495/mysql-data
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-mkeith495
+spec:
+  selector:
+    app: mysql-mkeith495
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-mkeith495
+spec:
+  selector:
+    matchLabels:
+      app: web-mkeith495
+  template:
+    metadata:
+      labels:
+        app: web-mkeith495
+    spec:
+      containers:
+        - name: web
+          image: mkeith495/codepostal-php:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: mysql-mkeith495
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_NAME
+              value: cp
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bdd-password-mkeith495
+                  key: password

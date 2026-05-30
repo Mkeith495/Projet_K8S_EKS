@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cp-php-masset
+  labels:
+    app: cp-php-masset
+spec:
+  containers:
+  - name: cp-php-masset
+    image: anthonymasset/codepostal-php:latest
+    env:
+      - name: DB_HOST
+        value: service-cp-bdd-masset
+      - name: DB_NAME
+        value: cp
+      - name: DB_PORT
+        value: "3306"
+      - name: DB_USER
+        value: root
+      - name: DB_PASSWORD
+        value: motdepassesecret
+    ports:
+      - containerPort: 80

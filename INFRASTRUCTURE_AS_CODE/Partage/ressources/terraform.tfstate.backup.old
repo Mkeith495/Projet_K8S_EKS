@@ -1,0 +1,378 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.8",
+  "serial": 23,
+  "lineage": "2cc56a86-7b9d-16f1-b3d7-df89eb781352",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "proxmox_virtual_environment_container",
+      "name": "debian_container",
+      "provider": "provider[\"registry.terraform.io/bpg/proxmox\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "clone": [],
+            "console": [],
+            "cpu": [],
+            "description": "Managed by Terraform\n",
+            "device_passthrough": [],
+            "disk": [
+              {
+                "acl": false,
+                "datastore_id": "data",
+                "mount_options": null,
+                "path_in_datastore": "data:103/vm-103-disk-0.raw",
+                "quota": false,
+                "replicate": false,
+                "size": 6
+              }
+            ],
+            "environment_variables": null,
+            "features": [
+              {
+                "fuse": false,
+                "keyctl": false,
+                "mount": null,
+                "nesting": true
+              }
+            ],
+            "hook_script_file_id": null,
+            "id": "103",
+            "idmap": [],
+            "initialization": [
+              {
+                "dns": [
+                  {
+                    "domain": "",
+                    "server": "",
+                    "servers": [
+                      "8.8.8.8",
+                      "1.1.1.1"
+                    ]
+                  }
+                ],
+                "entrypoint": "",
+                "hostname": "debian-ct-01-masset",
+                "ip_config": [
+                  {
+                    "ipv4": [
+                      {
+                        "address": "dhcp",
+                        "gateway": ""
+                      }
+                    ],
+                    "ipv6": []
+                  }
+                ],
+                "user_account": [
+                  {
+                    "keys": [
+                      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhdFBXrHZXrKbaP7fBBX6rwWGDIEJ+Wl1NiuViA2QzchkTtucZi625p9Aj8EEv5OLuVWixY7dIEu8QhGUWRsgF9ajRQjqiOO+GcomtlgkqG9Yb8C6t/dBLTDWimmiZkw7nXsM6TfX1+dHFQkSYy64ttBFgyDxNCxwvCTkDkTXMuBuOkwwDhUnBpyMYld6gOf0y3oczsgoaFrA0KU24Mc9xjL/w0m3zIG1CJhFPtExd4ZB0nIj774wsJR7sgnIGCBVgAv+gojEq3D3HSC+TA+nPX2zFP0XdTzjqbDQ9Juqp1xIAqHR56lql0cAWSD/TG6U010/GdL2LcrBVq7SFU8Zr anthony@totoport"
+                    ],
+                    "password": "P@ssw0rd"
+                  }
+                ]
+              }
+            ],
+            "ipv4": {
+              "veth0": "192.168.252.101"
+            },
+            "ipv6": {
+              "veth0": "fe80::be24:11ff:feeb:af78"
+            },
+            "memory": [],
+            "mount_point": [],
+            "network_interface": [
+              {
+                "bridge": "vmbr0",
+                "enabled": true,
+                "firewall": false,
+                "mac_address": "BC:24:11:EB:AF:78",
+                "mtu": 0,
+                "name": "veth0",
+                "rate_limit": 0,
+                "vlan_id": 0
+              }
+            ],
+            "node_name": "proxmox-form",
+            "operating_system": [
+              {
+                "template_file_id": "local:vztmpl/debian-13-standard_13.1-2_amd64.tar.zst",
+                "type": "debian"
+              }
+            ],
+            "pool_id": null,
+            "protection": false,
+            "start_on_boot": true,
+            "started": true,
+            "startup": [],
+            "tags": null,
+            "template": false,
+            "timeout_clone": 1800,
+            "timeout_create": 1800,
+            "timeout_delete": 60,
+            "timeout_start": 300,
+            "timeout_update": 1800,
+            "unprivileged": true,
+            "vm_id": 103,
+            "wait_for_ip": []
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "initialization"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "user_account"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "password"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "proxmox_virtual_environment_vm",
+      "name": "debian_vm",
+      "provider": "provider[\"registry.terraform.io/bpg/proxmox\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acpi": true,
+            "agent": [
+              {
+                "enabled": false,
+                "timeout": "15m",
+                "trim": false,
+                "type": "virtio",
+                "wait_for_ip": []
+              }
+            ],
+            "amd_sev": [],
+            "audio_device": [],
+            "bios": "seabios",
+            "boot_order": [
+              "scsi0",
+              "net0"
+            ],
+            "cdrom": [],
+            "clone": [],
+            "cpu": [
+              {
+                "affinity": "",
+                "architecture": "",
+                "cores": 2,
+                "flags": null,
+                "hotplugged": 0,
+                "limit": 0,
+                "numa": false,
+                "sockets": 1,
+                "type": "host",
+                "units": 0
+              }
+            ],
+            "delete_unreferenced_disks_on_destroy": true,
+            "description": "Managed by Terraform",
+            "disk": [
+              {
+                "aio": "io_uring",
+                "backup": true,
+                "cache": "none",
+                "datastore_id": "data",
+                "discard": "ignore",
+                "file_format": "qcow2",
+                "file_id": "",
+                "import_from": "local:import/debian-13-generic-amd64.qcow2",
+                "interface": "scsi0",
+                "iothread": false,
+                "path_in_datastore": "104/vm-104-disk-0.qcow2",
+                "replicate": true,
+                "serial": "",
+                "size": 10,
+                "speed": [],
+                "ssd": false
+              }
+            ],
+            "efi_disk": [],
+            "hook_script_file_id": null,
+            "hostpci": [],
+            "hotplug": null,
+            "id": "104",
+            "initialization": [
+              {
+                "datastore_id": "local-lvm",
+                "dns": [
+                  {
+                    "domain": "",
+                    "servers": [
+                      "8.8.8.8",
+                      "1.1.1.1"
+                    ]
+                  }
+                ],
+                "file_format": "",
+                "interface": "ide2",
+                "ip_config": [
+                  {
+                    "ipv4": [
+                      {
+                        "address": "dhcp",
+                        "gateway": ""
+                      }
+                    ],
+                    "ipv6": []
+                  }
+                ],
+                "meta_data_file_id": "",
+                "network_data_file_id": "",
+                "type": "",
+                "user_account": [
+                  {
+                    "keys": [
+                      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhdFBXrHZXrKbaP7fBBX6rwWGDIEJ+Wl1NiuViA2QzchkTtucZi625p9Aj8EEv5OLuVWixY7dIEu8QhGUWRsgF9ajRQjqiOO+GcomtlgkqG9Yb8C6t/dBLTDWimmiZkw7nXsM6TfX1+dHFQkSYy64ttBFgyDxNCxwvCTkDkTXMuBuOkwwDhUnBpyMYld6gOf0y3oczsgoaFrA0KU24Mc9xjL/w0m3zIG1CJhFPtExd4ZB0nIj774wsJR7sgnIGCBVgAv+gojEq3D3HSC+TA+nPX2zFP0XdTzjqbDQ9Juqp1xIAqHR56lql0cAWSD/TG6U010/GdL2LcrBVq7SFU8Zr anthony@totoport"
+                    ],
+                    "password": "**********",
+                    "username": "anthony"
+                  }
+                ],
+                "user_data_file_id": "",
+                "vendor_data_file_id": ""
+              }
+            ],
+            "ipv4_addresses": [],
+            "ipv6_addresses": [],
+            "keyboard_layout": "en-us",
+            "kvm_arguments": "",
+            "mac_addresses": [
+              "BC:24:11:65:7F:D4"
+            ],
+            "machine": "",
+            "memory": [
+              {
+                "dedicated": 2048,
+                "floating": 0,
+                "hugepages": "",
+                "keep_hugepages": false,
+                "shared": 0
+              }
+            ],
+            "migrate": false,
+            "name": "debian-vm-01-masset",
+            "network_device": [
+              {
+                "bridge": "vmbr0",
+                "disconnected": false,
+                "enabled": true,
+                "firewall": false,
+                "mac_address": "BC:24:11:65:7F:D4",
+                "model": "virtio",
+                "mtu": 0,
+                "queues": 0,
+                "rate_limit": 0,
+                "trunks": "",
+                "vlan_id": 0
+              }
+            ],
+            "network_interface_names": [],
+            "node_name": "proxmox-form",
+            "numa": [],
+            "on_boot": true,
+            "operating_system": [
+              {
+                "type": "l26"
+              }
+            ],
+            "pool_id": "",
+            "protection": false,
+            "purge_on_destroy": true,
+            "reboot": false,
+            "reboot_after_update": true,
+            "rng": [],
+            "scsi_hardware": "virtio-scsi-pci",
+            "serial_device": [],
+            "smbios": [],
+            "started": true,
+            "startup": [],
+            "stop_on_destroy": true,
+            "tablet_device": true,
+            "tags": null,
+            "template": false,
+            "timeout_clone": 1800,
+            "timeout_create": 1800,
+            "timeout_migrate": 1800,
+            "timeout_move_disk": 1800,
+            "timeout_reboot": 1800,
+            "timeout_shutdown_vm": 1800,
+            "timeout_start_vm": 1800,
+            "timeout_stop_vm": 300,
+            "tpm_state": [],
+            "usb": [],
+            "vga": [],
+            "virtiofs": [],
+            "vm_id": 104,
+            "watchdog": []
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "initialization"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "user_account"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "password"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
